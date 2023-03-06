@@ -1,5 +1,5 @@
 import React from "react";
-import "./Register.scss";
+import "./LoginRegister.scss";
 
 export default function Login() {
   return (

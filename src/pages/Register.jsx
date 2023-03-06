@@ -1,5 +1,5 @@
 import React from "react";
-import "./Register.scss";
+import "./LoginRegister.scss";
 import addAvatar from "../assets/addAvatar.png";
 
 export default function Register() {

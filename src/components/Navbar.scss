@@ -1,0 +1,34 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #2f2d52;
+  height: 3rem;
+  padding: 1rem;
+  justify-content: space-between;
+  color: whitesmoke;
+
+  .logo {
+    font-weight: bolder;
+  }
+
+  .user {
+    display: flex;
+    gap: 0.5rem;
+
+    img {
+      background-color: #ddddf7;
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    button {
+      background-color: #5d5b8d;
+      border: none;
+      color: #ddddf7;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  }
+}

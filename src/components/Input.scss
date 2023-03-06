@@ -1,0 +1,36 @@
+.input {
+  height: 3rem;
+  background-color: white;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #2f2d52;
+    font-size: 1rem;
+
+    &::placeholder {
+      color: lightgray;
+    }
+  }
+  .send {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    img {
+      height: 1.5rem;
+      cursor: pointer;
+    }
+    button {
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      background-color: #8da4f1;
+      cursor: pointer;
+    }
+  }
+}

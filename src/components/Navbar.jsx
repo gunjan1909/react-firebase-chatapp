@@ -7,7 +7,7 @@ export default function Navbar() {
       <span className="logo">ChatApp</span>
       <div className="user">
         <img
-          src="https://www.fsiblog2.com/wp-content/uploads/2022/09/cute-Indian-19yo-teen-nude-photos-7.jpg"
+          src="https://rukminim1.flixcart.com/image/416/416/k8t3jbk0/poster/6/f/w/medium-poster-narendra-modi-ji-poster-poster-for-wall-decoration-original-imafqqrru7x2hjbw.jpeg?q=70"
           alt=""
         />
         <span>John</span>

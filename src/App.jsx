@@ -7,9 +7,9 @@ function App() {
   // return <h1>{import.meta.env.VITE_TEST_KEY}</h1>;
   return (
     <>
-      <Home />
-      {/* <Login />
-      <Register /> */}
+      {/* <Home /> */}
+      {/* <Login /> */}
+      <Register />
     </>
   );
 }

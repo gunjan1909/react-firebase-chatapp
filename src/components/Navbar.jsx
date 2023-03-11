@@ -1,19 +1,19 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { auth } from "../firebase";
 import "./Navbar.scss";
 
 export default function Navbar() {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <span className="logo">ChatApp</span>
       <div className="user">
-        <img
-          src="https://rukminim1.flixcart.com/image/416/416/k8t3jbk0/poster/6/f/w/medium-poster-narendra-modi-ji-poster-poster-for-wall-decoration-original-imafqqrru7x2hjbw.jpeg?q=70"
-          alt=""
-        />
-        <span>John</span>
-        <button onClick={() => signOut(auth)}>Logout</button>
+        <img src={currentUser.photoURL} alt="" />
+        <span>{currentUser.displayName}</span>
+        <button onClick={() => signOut(auth)}>logout</button>
       </div>
     </div>
   );

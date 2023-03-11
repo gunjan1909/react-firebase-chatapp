@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LoginRegister.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -15,6 +15,8 @@ export default function Login() {
     const password = e.target[1].value;
 
     try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (err) {
       console.log(err);
       setErr(true);
@@ -31,8 +33,11 @@ export default function Login() {
           <input type="email" placeholder="Email" />
           <input type="password" placeholder="Password" />
           <button>Log In</button>
+          {err && <p>Invalid Email or Password</p>}
         </form>
-        <p>Don't have an account? Sign Up</p>
+        <p>
+          Don't have an account? <Link to="/register">Sign Up</Link>
+        </p>
       </div>
     </div>
   );

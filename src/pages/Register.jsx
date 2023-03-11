@@ -5,7 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import "./LoginRegister.scss";
 import addAvatar from "../assets/addAvatar.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
   const [err, setErr] = useState(false);
@@ -118,7 +118,9 @@ export default function Register() {
           <button>Sign Up</button>
           {err && <span className="error">Something went wrong</span>}
         </form>
-        <p>You already have an accont? Login</p>
+        <p>
+          You already have an accont? <Link to="/login">Login</Link>
+        </p>
       </div>
     </div>
   );

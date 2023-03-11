@@ -1,4 +1,6 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { auth } from "../firebase";
 import "./Navbar.scss";
 
 export default function Navbar() {
@@ -11,7 +13,7 @@ export default function Navbar() {
           alt=""
         />
         <span>John</span>
-        <button>Logout</button>
+        <button onClick={() => signOut(auth)}>Logout</button>
       </div>
     </div>
   );

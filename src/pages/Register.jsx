@@ -5,9 +5,13 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import "./LoginRegister.scss";
 import addAvatar from "../assets/addAvatar.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [err, setErr] = useState(false);
+  //navigate
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const displayName = e.target[0].value;
@@ -15,13 +19,16 @@ export default function Register() {
     const password = e.target[2].value;
     const file = e.target[3].files[0];
 
-    try {
+    /* try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      const storageRef = ref(storage, displayName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName+date}`);
+
+      await uploadBytesResumable(storageRef, file);
       uploadTask.on(
-        () => {
+        (err) => {
+          console.log(err);
           setErr(true);
         },
         () => {
@@ -39,7 +46,42 @@ export default function Register() {
           });
         }
       );
+    }
+    catch (err) {
+      console.log(err);
+      setErr(true);
+    }
+    */
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
+
+      await uploadBytesResumable(storageRef, file).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            /* await updateProfile(res.user, {
+              displayName,
+              photoURL: downloadURL,
+            });*/
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadURL,
+            });
+
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
+          } catch (err) {
+            console.log(err);
+            setErr(true);
+          }
+        });
+      });
     } catch (err) {
+      console.log(err);
       setErr(true);
     }
   };
@@ -54,8 +96,22 @@ export default function Register() {
           <input type="text" placeholder="Display Name" />
           <input type="email" placeholder="Email" />
           <input type="password" placeholder="Password" />
-          <input style={{ display: "none" }} type="file" id="file" />
-          <label htmlFor="file">
+          {/* change display of input when file added */}
+          <input
+            style={{ display: "none" }}
+            type="file"
+            id="file"
+            onChange={(e) => {
+              if (e.target.files[0]) {
+                document.getElementById(
+                  "testest"
+                ).innerHTML = `<img src=${URL.createObjectURL(
+                  e.target.files[0]
+                )} alt="" /> <span>${e.target.files[0].name} </span>`;
+              }
+            }}
+          />
+          <label id="testest" htmlFor="file">
             <img src={addAvatar} alt="" />
             <span>Add an avatar</span>
           </label>

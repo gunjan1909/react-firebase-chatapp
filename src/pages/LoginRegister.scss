@@ -16,10 +16,12 @@
       color: #5d5b8d;
       font-size: 2rem;
       font-weight: bold;
+      margin: 0;
     }
     .title {
       color: #5d5b8d;
-      font-size: 1rem;
+      font-size: 1.2rem;
+      margin: 0;
     }
     form {
       display: flex;
@@ -27,6 +29,7 @@
       gap: 1rem;
       input {
         padding: 1rem;
+        font-size: 1.05rem;
         border: none;
         border-bottom: 1px solid #a7bcff;
         min-width: 250px;
@@ -34,13 +37,22 @@
           color: rgb(175, 175, 175);
         }
       }
+      input#showpass {
+        min-width: 20px;
+      }
       button {
         background-color: #7b96ec;
         color: white;
         padding: 1rem;
         font-weight: bold;
+        font-size: 1rem;
         border: none;
         cursor: pointer;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-color: #5d5b8d;
+        }
       }
       label {
         display: flex;

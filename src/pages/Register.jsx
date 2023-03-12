@@ -61,10 +61,10 @@ export default function Register() {
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            /* await updateProfile(res.user, {
+            await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
-            });*/
+            });
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
@@ -89,8 +89,8 @@ export default function Register() {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        <span className="logo">ChatApp</span>
-        <span className="title">Register</span>
+        <h1 className="logo">ChatApp</h1>
+        <h2 className="title">Register</h2>
 
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Display Name" />

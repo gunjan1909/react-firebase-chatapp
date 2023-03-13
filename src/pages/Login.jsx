@@ -45,7 +45,12 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="Email" />
-          <input id="password" type="password" placeholder="Password" />
+          <input
+            id="password"
+            type="password"
+            autoComplete="on"
+            placeholder="Password"
+          />
           <div style={{ display: "flex" }}>
             <input type="checkbox" onClick={myFunction} id="showpass" />
             <label style={styleForShowPassLabel} htmlFor="showpass">

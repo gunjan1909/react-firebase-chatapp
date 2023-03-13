@@ -95,7 +95,7 @@ export default function Register() {
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Display Name" />
           <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" autoComplete="on" />
           {/* change display of input when file added */}
           <input
             style={{ display: "none" }}

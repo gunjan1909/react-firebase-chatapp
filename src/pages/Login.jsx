@@ -18,14 +18,14 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setErr(true);
     }
   };
 
   const myFunction = () => {
     var x = document.getElementById("password");
-    console.log(x);
+    // console.log(x);
     if (x.type === "password") {
       x.type = "text";
     } else {

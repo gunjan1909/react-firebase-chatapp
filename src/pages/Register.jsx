@@ -28,7 +28,7 @@ export default function Register() {
       await uploadBytesResumable(storageRef, file);
       uploadTask.on(
         (err) => {
-          console.log(err);
+          //console.log(err);
           setErr(true);
         },
         () => {
@@ -48,7 +48,7 @@ export default function Register() {
       );
     }
     catch (err) {
-      console.log(err);
+     // console.log(err);
       setErr(true);
     }
     */
@@ -75,13 +75,13 @@ export default function Register() {
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
           } catch (err) {
-            console.log(err);
+            // console.log(err);
             setErr(true);
           }
         });
       });
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       setErr(true);
     }
   };

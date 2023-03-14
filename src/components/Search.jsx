@@ -26,6 +26,15 @@ export default function Search() {
       collection(db, "users"),
       where("displayName", "==", userName)
     );
+    // console.log(q);
+
+    //EXTRA
+    if (q.exists) {
+      setErr(false);
+    } else {
+      setErr(true);
+    }
+
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -33,13 +42,16 @@ export default function Search() {
         setErr(false);
       });
     } catch (err) {
-      // console.log(err);
+      //console.log(err);
       setErr(true);
     }
   };
 
   const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
+    // e.code === "Enter" && handleSearch();
+    if (e.code === "Enter") {
+      handleSearch();
+    }
   };
 
   const handleSelect = async () => {
@@ -73,14 +85,12 @@ export default function Search() {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
 
     setUserName("");
     setUser(null);
   };
-
+  //console.log(err);
   return (
     <div className="search">
       <div className="searchForm">
@@ -94,8 +104,8 @@ export default function Search() {
           value={userName}
         />
       </div>
-      {err && <span className="err">User not found</span>}
-      {user && (
+      {err && <span className="err">User not found!</span>}
+      {user && !err && (
         <div className="userChat" onClick={handleSelect}>
           <img src={user.photoURL} alt="" />
           <div className="userChatInfo">

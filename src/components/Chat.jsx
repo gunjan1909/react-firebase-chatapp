@@ -10,6 +10,8 @@ import { ChatContext } from "../context/ChatContext";
 export default function Chat() {
   const { data } = useContext(ChatContext);
 
+  //console.log(data);
+
   return (
     <div className="chat">
       <div className="chatInfo">
@@ -21,7 +23,7 @@ export default function Chat() {
         </div>
       </div>
       <Messages />
-      <Input />
+      <Input chatName={data.user?.displayName} />
     </div>
   );
 }

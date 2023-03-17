@@ -5,6 +5,7 @@ export const ChatContext = createContext();
 
 export const ChatContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
+
   const INITIAL_STATE = {
     chatId: "null",
     user: {},
@@ -12,7 +13,7 @@ export const ChatContextProvider = ({ children }) => {
 
   const chatReducer = (state, action) => {
     switch (action.type) {
-      case "CHANGE USER":
+      case "CHANGE_USER":
         return {
           user: action.payload,
           chatId:

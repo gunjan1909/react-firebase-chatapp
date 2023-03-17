@@ -7,11 +7,12 @@ import "./Chats.scss";
 
 export default function Chats() {
   const [chats, setChats] = useState([]);
+
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
-    console.log("useEffect");
+    // console.log("useEffect");
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         //console.log(doc.data());
@@ -28,6 +29,7 @@ export default function Chats() {
   //console.log(Object.entries(chats));
 
   const handleSelect = (u) => {
+    //console.log(u);
     dispatch({
       type: "CHANGE_USER",
       payload: u,

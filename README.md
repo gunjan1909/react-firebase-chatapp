@@ -69,3 +69,8 @@ MIT
 - [React](https://reactjs.org/docs/getting-started.html)
 - [Vite](https://vitejs.dev/guide/)
 - [Firebase](https://firebase.google.com/docs)
+
+## Existing Test User for testing 2 way:
+
+- Email: `test@test.com`
+- Password: `test@test`

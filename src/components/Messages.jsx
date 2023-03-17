@@ -22,7 +22,7 @@ export default function Messages() {
   return (
     <div className="messages">
       {messages.map((msg) => {
-        return <Message msg={msg} key={msg.id} />;
+        return <Message message={msg} key={msg.id} />;
       })}
     </div>
   );

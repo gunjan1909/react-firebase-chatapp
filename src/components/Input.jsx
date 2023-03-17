@@ -15,9 +15,10 @@ import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-export default function Input() {
+export default function Input({ chatName }) {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+  const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -29,9 +30,21 @@ export default function Input() {
 
       uploadTask.on(
         (error) => {
-          //TODO:Handle Error
+          setErr(true);
         },
         () => {
+          /* const downloadURL = getDownloadURL(uploadTask.snapshot.ref);
+
+          const msg = {
+            id: uuid(),
+            text,
+            senderId: currentUser.uid,
+            date: Timestamp.now(),
+            img: downloadURL,
+          };
+          updateDoc(doc(db, "chats", data.chatId), {
+            messages: arrayUnion(msg),
+          });*/
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
@@ -46,16 +59,32 @@ export default function Input() {
         }
       );
     } else {
+      const msg = {
+        id: uuid(),
+        text,
+        senderId: currentUser.uid,
+        date: Timestamp.now(),
+      };
       await updateDoc(doc(db, "chats", data.chatId), {
-        messages: arrayUnion({
-          id: uuid,
-          text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
+        messages: arrayUnion(msg),
       });
     }
+
+    await updateDoc(doc(db, "userChats", currentUser.uid), {
+      [data.chatId + ".lastMessage"]: { text },
+      [data.chatId + ".date"]: serverTimestamp(),
+    });
+
+    await updateDoc(doc(db, "userChats", data.user.uid), {
+      [data.chatId + ".lastMessage"]: { text },
+      [data.chatId + ".date"]: serverTimestamp(),
+    });
+
+    setText("");
+    setImg(null);
   };
+
+  //console.log(data.chatId);
   return (
     <div className="input">
       <input
@@ -64,20 +93,41 @@ export default function Input() {
         onChange={(e) => {
           setText(e.target.value);
         }}
+        value={text ? text : ""}
       />
       <div className="send">
         <img src={Attach} alt="" />
         <input
           type="file"
           style={{ display: "none" }}
-          name=""
           id="file"
-          onChange={(e) => setImg(e.target.files[0])}
+          onChange={(e) => {
+            if (e.target.files[0]) {
+              setImg(e.target.files[0]);
+              document.getElementById(
+                "testest2"
+              ).innerHTML = `<img src=${URL.createObjectURL(
+                e.target.files[0]
+              )} alt="" /> <span>${e.target.files[0].name} </span>`;
+            }
+          }}
+          value={img ? img : ""}
         />
-        <label htmlFor="file">
+        <label id="testest2" htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button
+          onClick={() => {
+            //console.log(data.chatId);'
+            console.log(chatName);
+            if (chatName === undefined) alert("Please select a user");
+            else handleSend();
+          }}
+        >
+          Send
+        </button>
+        {/* handle error */}
+        {err && <p>Something went wrong</p>}
       </div>
     </div>
   );

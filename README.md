@@ -52,18 +52,6 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 
 See [Contributing Guide](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md).
 
-## License
-
-MIT
-
-## Sponsors
-
-<p align="center">
-  <a target="_blank" href="https://github.com/sponsors/yyx990803">
-    <img alt="sponsors" src="https://sponsors.vuejs.org/vite.svg">
-  </a>
-</p>
-
 ## Documentation
 
 - [React](https://reactjs.org/docs/getting-started.html)
